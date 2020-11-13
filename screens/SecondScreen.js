@@ -1,9 +1,11 @@
 import React from 'react';
 import {Text, View, Button, StyleSheet} from 'react-native';
+import Bubble from '../components/Bubble';
 
 const SecondScreen = ({ navigation, route }) => (
   <View style={styles.container}>
     <Text>second screen</Text>
+    <Bubble/>
     <Button
       title="Go to Home"
       onPress={() => {
