@@ -1,21 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer } from '@react-navigation/native'
+import HomeScreen from './screens/Home';
+import SecondScreen from './screens/SecondScreen';
+
+const Root = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+        <Root.Navigator>
+          <Root.Screen name="Home" component={HomeScreen} />
+          <Root.Screen name="Screen2" component={SecondScreen} />
+        </Root.Navigator>
+      </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
