@@ -3,7 +3,6 @@ import {Text, View, StyleSheet, Animated, TouchableWithoutFeedback} from 'react-
 import useAnimation from '../hooks/useAnimation';
 
 const animationConfig = (value) => ({
-  initialValue: value,
   toValue: value,
   duration: 100,
   useNativeDriver: true,
@@ -11,24 +10,39 @@ const animationConfig = (value) => ({
 
 const Bubble = () => {
   const [size, setSize] = useState(1);
+  const [active, setActive] = useState(false);
   const sizeAnimation = useAnimation(animationConfig(size));
 
-  return <TouchableWithoutFeedback onPressIn={() => setSize(1.2)} onPressOut={() => setSize(1)}>
-    <Animated.View style={[styles.bubble, { transform: [{scaleX: sizeAnimation }, {scaleY: sizeAnimation }]}]} />
+  const onPressIn = () => {
+    setSize(1.1);
+    setActive(!active);
+  };
+
+  const onPressOut = () => {
+    setSize(1)
+  };
+
+  return <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
+    <Animated.View style={[styles.bubble, active && styles.active, { transform: [{scaleX: sizeAnimation }, {scaleY: sizeAnimation }] }]} />
   </TouchableWithoutFeedback>
 };
 
 const styles = StyleSheet.create({
   bubble: {
-    backgroundColor: 'red',
+    backgroundColor: '#FFFFFF',
+    borderColor: 'black',
+    borderWidth: 2,
     padding: 10,
     margin: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 100,
-    width: 100,
-    height: 100,
+    borderRadius: 1000,
+    minHeight: 50,
+    minWidth: 50,
   },
+  active: {
+    backgroundColor: '#FF0000',
+  }
 });
 
 export default Bubble;
